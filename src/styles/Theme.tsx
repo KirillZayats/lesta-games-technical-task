@@ -4,11 +4,9 @@ import { PropsTheme } from "../additionally/interfaces";
 
 const standartTheme = {
   colors: {
-    MAIN_BG_COLOR: "#282C33",
-    SECOND_BG_COLOR: "#2d323a",
-    TEXT_COLOR: "#fff",
-    SECOND_TEXT_COLOR: "#ABB2BF",
-    MARKER_COLOR: "#C778DD",
+    MAIN_BG_COLOR: "rgb(2, 34, 61)",
+    SECOND_BG_COLOR: "#00172C",
+    TEXT_COLOR: "#00B4B9",
   },
 };
 

@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from "react";
+import { userTypeSelector } from "./store/hooks/useTypeSelector";
+import { useAction } from "./store/hooks/useAction";
+import { Theme } from "./styles/Theme";
+import { GlobalStyle } from "./styles/AppStyled";
 
-function App() {
+const App = () => {
+  // const test = userTypeSelector(state => state.data)
+  const { getData } = useAction();
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-          Learn React
-      </header>
-    </div>
+    <Theme>
+      <GlobalStyle />
+      <div>App</div>
+    </Theme>
   );
-}
+};
 
 export default App;
