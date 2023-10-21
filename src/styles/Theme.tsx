@@ -6,7 +6,9 @@ const standartTheme = {
   colors: {
     MAIN_BG_COLOR: "rgb(2, 34, 61)",
     SECOND_BG_COLOR: "#00172C",
-    TEXT_COLOR: "#00B4B9",
+    TEXT_COLOR: "#fff",
+    HALF_TEXT_COLOR: "#ffffff76",
+    HOVER_TEXT_COLOR: "#00B4B9"
   },
 };
 

@@ -2,30 +2,50 @@ export interface PropsTheme {
     children: React.ReactNode;
   }
 
-export type TVehicles = {
+export interface IPropsVehicles {
+  vehicles: IVehicles 
+}
+
+export interface IPropsBg {
+  background: string | undefined;
+}
+
+export interface IVehicles {
   title: string;
   description: string;
   icons: TIcons;
-  level: string;
+  level: number;
   type: TTypeVehicles;
   nation: TNation;
 }
 
 type TIcons = {
-  large?: string;
-  medium?: string;
-  small?: string;
+  large: string;
+  medium: string;
 }
 
 type TTypeVehicles = {
   name: string;
   title: string;
-  icons: TIcons;
+  icons: TIconType;
+}
+
+type TIconType = {
+  default: string
 }
 
 type TNation = {
   name: string;
   title: string;
   color: string;
-  icons: TIcons;
+  icons: TIconNation;
+}
+
+type TIconNation = {
+  large: string;
+  small: string;
+}
+
+export interface PropsElementList {
+  textElement: string;
 }

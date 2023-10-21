@@ -1,4 +1,4 @@
-import { TVehicles } from "../../additionally/interfaces";
+import { IVehicles } from "../../additionally/interfaces";
 
 export enum DataActionType {
     GET_DATA = "GET_DATA"
@@ -7,7 +7,7 @@ export enum DataActionType {
  export interface IGetDataAction {
     type: DataActionType.GET_DATA,
     isLoading: boolean,
-    data: TVehicles,
+    data: IVehicles,
 };
 
 export type DataAction = IGetDataAction; 

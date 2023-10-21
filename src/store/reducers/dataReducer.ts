@@ -5,7 +5,7 @@ const initialState = {
     data: {},
   };
   
-  export const dataReducer = (state = initialState, action: DataAction) => {
+  export const dataReducer = (state = initialState, action: DataAction) => {    
     switch (action.type) {
       case DataActionType.GET_DATA:
         return {

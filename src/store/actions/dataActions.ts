@@ -1,5 +1,5 @@
 import { pathName, query } from "../../additionally/constants";
-import { TVehicles } from "../../additionally/interfaces";
+import { IVehicles } from "../../additionally/interfaces";
 import { DataActionType, IGetDataAction } from "../types";
 
 export const getData = () => {
@@ -25,7 +25,7 @@ export const getData = () => {
     }
 }
 
-export const getDataSuccess = (data: TVehicles): IGetDataAction => {
+export const getDataSuccess = (data: IVehicles): IGetDataAction => {
     console.log(data);
     return {
         type: DataActionType.GET_DATA,
