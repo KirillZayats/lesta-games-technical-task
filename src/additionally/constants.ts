@@ -1,4 +1,4 @@
-export const pathName = 'https://vortex.korabli.su/api/graphql/glossary/';
+export const BASE_URL = 'https://vortex.korabli.su/api/graphql/glossary/';
 
 export const query = `query allShips {
     vehicles {

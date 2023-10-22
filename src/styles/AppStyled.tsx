@@ -5,7 +5,17 @@ const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    scroll-behavior: smooth;
   }
+
+  
 
   body {
     background: ${({ theme }) => theme.colors.MAIN_BG_COLOR};
@@ -41,6 +51,11 @@ const GlobalStyle = createGlobalStyle`
   path {
     fill: ${({ theme }) => theme.colors.TEXT_COLOR};
   }
+
+  span, path, a, p, img {
+    transition: .3s ease-out;
+  }
+
 
 `;
 

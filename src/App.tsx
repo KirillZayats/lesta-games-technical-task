@@ -1,9 +1,10 @@
 import React, { useEffect, Suspense, lazy } from "react";
-import { useAction } from "./store/hooks/useAction";
+import { useAction } from "./hooks/useAction";
 import { Theme } from "./styles/Theme";
 import { ContainerProvider, GlobalStyle } from "./styles/AppStyled";
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
+import NotFound from "./pages/NotFound";
 
 const Header = lazy(() => import("./components/header/Header"));
 const Footer = lazy(() => import("./components/footer/Footer"));
@@ -38,6 +39,7 @@ const App = () => {
             <Routes>
               <Route path={`/`} element={<Home />} />
               <Route path={`/contacts`} element={<Contacts />} />
+              <Route path={`*`} element={<NotFound/>}/>
             </Routes>
             <Footer />
           </ContainerProvider>

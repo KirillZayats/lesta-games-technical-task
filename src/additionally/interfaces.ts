@@ -3,7 +3,8 @@ export interface PropsTheme {
   }
 
 export interface IPropsVehicles {
-  vehicles: IVehicles 
+  vehicles: IVehicles;
+  page: number
 }
 
 export interface IPropsBg {

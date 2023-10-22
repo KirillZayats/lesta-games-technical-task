@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Icon from "../styles/Icon";
-import { device } from "../styles/media/MediaQueryStyled";
+import Icon from "../../styles/Icon";
+import { device } from "../../styles/media/MediaQueryStyled";
 
 const SortLineStyle = styled.section`
   display: flex;

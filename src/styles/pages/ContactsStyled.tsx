@@ -72,7 +72,7 @@ const TextStyle = styled.p`
 `;
 
 const SocialLinksStyle = styled.div`
-  border: 1px solid ${({ theme }) => theme.colors.SECOND_TEXT_COLOR};
+  border: 1px solid ${({ theme }) => theme.colors.TEXT_COLOR};
 `;
 
 const ListLinksStyle = styled.ul`
@@ -83,7 +83,7 @@ const ListLinksStyle = styled.ul`
   column-gap: 16px;
   row-gap: 8px;
 
-  border-top: 1px solid ${({ theme }) => theme.colors.SECOND_TEXT_COLOR};
+  border-top: 1px solid ${({ theme }) => theme.colors.TEXT_COLOR};
   padding: 8px;
 `;
 

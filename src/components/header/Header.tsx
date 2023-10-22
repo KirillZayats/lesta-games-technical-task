@@ -11,7 +11,7 @@ import Sidebar from "./Sidebar";
 import { InputCheckBoxStyle } from "../../styles/header/SidebarStyled";
 // import Dropdown from "./Dropdown";
 import { useLocation } from "react-router-dom";
-import { userTypeSelector } from "../../store/hooks/useTypeSelector";
+import { userTypeSelector } from "../../hooks/useTypeSelector";
 
 const Header = () => {
   const [widthWindow, setWidthWindow] = useState(window.innerWidth);

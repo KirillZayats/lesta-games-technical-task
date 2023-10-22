@@ -1,11 +1,11 @@
-import { pathName, query } from "../../additionally/constants";
+import { BASE_URL, query } from "../../additionally/constants";
 import { IVehicles } from "../../additionally/interfaces";
 import { DataActionType, IGetDataAction } from "../types";
 
 export const getData = () => {
     
     return async (dispatch: any) => {
-        return fetch(pathName, {
+        return fetch(BASE_URL, {
             method: 'POST',
             headers: {
               'Content-type': 'application/json',
@@ -26,7 +26,6 @@ export const getData = () => {
 }
 
 export const getDataSuccess = (data: IVehicles): IGetDataAction => {
-    console.log(data);
     return {
         type: DataActionType.GET_DATA,
         data: data,
