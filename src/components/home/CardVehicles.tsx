@@ -61,13 +61,17 @@ const ElementListStyle = styled.li`
   }
 
   .level-no-active {
+    width: 25px;
     font-size: 22px;
     left: 0px;
     top: 0px;
+    text-align: center;
   }
   .level-active {
+    width: 25px;
     left: 10px;
     top: -10px;
+    text-align: center;
   }
 
   .type-no-active {
@@ -97,7 +101,7 @@ const ElementListStyle = styled.li`
     top: 0;
   }
   .name-active {
-    left: -260px;
+    left: -277px;
     font-size: 22px;
     top: -40px;
   }
@@ -114,6 +118,7 @@ const ElementListStyle = styled.li`
     position: absolute;
     left: 216px;
     top: 55px;
+    z-index: 2;
   }
 
   .type_name-no-active {
@@ -127,6 +132,7 @@ const ElementListStyle = styled.li`
     position: absolute;
     left: 216px;
     top: 80px;
+    z-index: 2;
   }
 
   .type_title-no-active {
@@ -194,7 +200,7 @@ const ElementListStyle = styled.li`
   }
 `;
 
-const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page }) => {
+const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page, typeSort }) => {
   const [partId, setPartId] = useState<string>('');
   const [card, setCard] = useState<HTMLElement | null>();
   const [name, setName] = useState<HTMLElement | null>();
@@ -208,6 +214,7 @@ const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page }) => {
   const [nationName, setNationName] = useState<HTMLElement | null>();
   const [nationTitle, setNationTitle] = useState<HTMLElement | null>();
   const [description, setDescription] = useState<HTMLElement | null>();
+  
   useEffect(() => {
     setPartId(vehicles.title.replace(/\<|\>|\(|\)|\.|\s|$/g, ''))    
   }, [vehicles]);
@@ -229,7 +236,7 @@ const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page }) => {
 
   useEffect(() => {
     deleteView();
-  }, [page])
+  }, [page, typeSort])
 
   const clickCard = () => {
     card && card.classList.toggle("card-active");

@@ -8,6 +8,7 @@ import CardVehicles from "../components/home/CardVehicles";
 import SortLine from "../components/home/SortLine";
 import { Pagination, PaginationItem } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { TypeSort } from "../additionally/constants";
 
 const HomeStyle = styled.article`
   color: ${({ theme }) => theme.colors.TEXT_COLOR};
@@ -40,44 +41,82 @@ const ContainerListStyle = styled.div`
 `;
 
 const Home = () => {
-  let location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useSelector((state: any) => state.data);
+  const { data, isLoading, mapSortData } = useSelector((state: any) => state.data);
   const [listVehicles, setListVehicles] = useState<IVehicles[]>();
   const [nowPage, setNowPage] = useState<number>(
     parseInt(location.search.split("=")[1]) || 1
   );
+  const [typeSort, setTypeSort] = useState<string>("");
   const limit = 50;
 
+  // students.sort((firstItem, secondItem) => firstItem.grade - secondItem.grade);
+
   useEffect(() => {
+   
+    switch (typeSort) {
+      case TypeSort.NATION_ASC:
+        getDataPage(mapSortData.get(TypeSort.NATION_ASC));
+        break;
+      case TypeSort.NATION_DESC:
+        getDataPage(mapSortData.get(TypeSort.NATION_DESC));
+        break;
+      case TypeSort.TYPE_ASC:
+        getDataPage(mapSortData.get(TypeSort.TYPE_ASC));
+        break;
+      case TypeSort.TYPE_DESC:
+        getDataPage(mapSortData.get(TypeSort.TYPE_DESC));
+        break;
+      case TypeSort.LEVEL_ASC:
+        getDataPage(mapSortData.get(TypeSort.LEVEL_ASC));
+        break;
+      case TypeSort.LEVEL_DESC:
+        getDataPage(mapSortData.get(TypeSort.LEVEL_DESC));
+        break;
+      case TypeSort.NAME_ASC:
+        getDataPage(mapSortData.get(TypeSort.NAME_ASC));
+        break;
+      case TypeSort.NAME_DESC:
+        getDataPage(mapSortData.get(TypeSort.NAME_DESC));
+        break;
+      default:
+        break;
+    }
+  }, [typeSort]);
+
+  useEffect(() => {
+    getDataPage(data);
+  }, [isLoading]);
+
+  const getDataPage = (data: Array<IVehicles>): void => {
     setListVehicles(
-      data.data.vehicles.filter(
+      data.filter(
         (vehicle: IVehicles, index: number) =>
           index < limit * nowPage && index >= limit * (nowPage - 1) && vehicle
       )
     );
-  }, [isLoading]);
+  }
 
   useEffect(() => {
-    if ( location.search && (Number.isNaN(parseInt(location.search.split("=")[1])) ||
-    parseInt(location.search.split("=")[1]) < 1 ||
-    parseInt(location.search.split("=")[1]) >
-      data.data.vehicles.length / limit)
-      
+    if (
+      location.search &&
+      (Number.isNaN(parseInt(location.search.split("=")[1])) ||
+        parseInt(location.search.split("=")[1]) < 1 ||
+        parseInt(location.search.split("=")[1]) >
+          data.length / limit)
     ) {
       navigate(`*`);
     }
   }, [useLocation]);
 
+  useEffect(() => {
+    typeSort ? getDataPage(mapSortData.get(typeSort)) : getDataPage(data)
+  }, [nowPage])
+
   const onChangePage = (num: number) => {
     setNowPage(num);
-    setListVehicles(
-      data.data.vehicles.filter(
-        (vehicle: IVehicles, index: number) =>
-          index < limit * num && index >= limit * (num - 1) && vehicle
-      )
-    );
   };
 
   return (
@@ -85,18 +124,18 @@ const Home = () => {
       <HomeStyle>
         <TitleStyle>Vehicles</TitleStyle>
         <ContainerListStyle>
-          <SortLine />
+          <SortLine typeSort={typeSort} setTypeSort={setTypeSort} />
           <ListCardStyle>
             {listVehicles &&
               listVehicles.map((item, index) => (
-                <CardVehicles key={index} vehicles={item} page={nowPage} />
+                <CardVehicles key={index} vehicles={item} page={nowPage} typeSort={typeSort} />
               ))}
           </ListCardStyle>
           {listVehicles && (
             <Pagination
               className="pagination"
               onChange={(_, num) => onChangePage(num)}
-              count={Math.ceil(data.data.vehicles.length / limit)}
+              count={Math.ceil(data.length / limit)}
               page={nowPage}
               color="primary"
               renderItem={(item) => (

@@ -52,7 +52,7 @@ const HeaderStyle = styled.header`
   margin: 0 auto;
   width: 100%;
   position: fixed;
-  z-index: 2;
+  z-index: 3;
 `;
 
 const ContainerStyle = styled.div`

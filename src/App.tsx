@@ -17,9 +17,7 @@ const App = () => {
 
   const { getData } = useAction();
   useEffect(() => {
-    getData();
-    console.log(isLoading);
-    
+    getData();    
   }, []);
 
   return (

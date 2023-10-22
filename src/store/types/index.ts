@@ -7,7 +7,7 @@ export enum DataActionType {
  export interface IGetDataAction {
     type: DataActionType.GET_DATA,
     isLoading: boolean,
-    data: IVehicles,
+    data: IVehicles[],
 };
 
 export type DataAction = IGetDataAction; 

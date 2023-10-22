@@ -20,12 +20,12 @@ export const getData = () => {
             })
             .then(response => response.json())
             .then(data => {                
-                dispatch(getDataSuccess(data))
+                dispatch(getDataSuccess(data.data.vehicles))
             })
     }
 }
 
-export const getDataSuccess = (data: IVehicles): IGetDataAction => {
+export const getDataSuccess = (data: IVehicles[]): IGetDataAction => {
     return {
         type: DataActionType.GET_DATA,
         data: data,

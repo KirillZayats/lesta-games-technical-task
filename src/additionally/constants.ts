@@ -29,6 +29,18 @@ export const query = `query allShips {
   }
 }`;
 
+export enum TypeSort {
+  NATION_ASC = "NATION_ASC",
+  NATION_DESC = "NATION_DESC",
+  LEVEL_ASC = "LEVEL_ASC",
+  LEVEL_DESC = "LEVEL_DESC",
+  NAME_ASC = "NAME_ASC",
+  NAME_DESC = "NAME_DESC",
+  TYPE_ASC = "TYPE_ASC",
+  TYPE_DESC = "TYPE_DESC",
+
+}
+
 export const LINK_LINKEDIN = 'https://www.linkedin.com/in/kiryl-zayats';
 export const LINK_TELEGRAM = 'https://t.me/+375295304989';
 export const LINK_GITHUB = 'https://github.com/KirillZayats?tab=repositories';

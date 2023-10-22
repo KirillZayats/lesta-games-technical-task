@@ -4,7 +4,13 @@ export interface PropsTheme {
 
 export interface IPropsVehicles {
   vehicles: IVehicles;
-  page: number
+  page: number;
+  typeSort: string
+}
+
+export interface IPropsSort {
+  typeSort: string;
+  setTypeSort: (value: string) => void;
 }
 
 export interface IPropsBg {
