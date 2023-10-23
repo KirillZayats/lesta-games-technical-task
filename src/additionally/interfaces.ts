@@ -13,6 +13,13 @@ export interface IPropsSort {
   setTypeSort: (value: string) => void;
 }
 
+export interface IPropsFilter {
+  valuesFilter: string[];
+  setValuesFilter: (value: string[]) => void;
+}
+
+
+
 export interface IPropsBg {
   background: string | undefined;
 }
@@ -24,6 +31,11 @@ export interface IVehicles {
   level: number;
   type: TTypeVehicles;
   nation: TNation;
+}
+
+export interface IDataFilter {
+  name: string;
+  icon: string;
 }
 
 type TIcons = {

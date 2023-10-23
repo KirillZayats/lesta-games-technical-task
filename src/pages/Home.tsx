@@ -9,6 +9,7 @@ import SortLine from "../components/home/SortLine";
 import { Pagination, PaginationItem } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TypeSort } from "../additionally/constants";
+import FilterLine from "../components/home/FilterLine";
 
 const HomeStyle = styled.article`
   color: ${({ theme }) => theme.colors.TEXT_COLOR};
@@ -25,6 +26,7 @@ const ListCardStyle = styled.ul`
 `;
 
 const ContainerListStyle = styled.div`
+margin-top: 20px;
   .pagination ul {
     margin: 10px auto;
     flex-direction: row;
@@ -49,10 +51,14 @@ const Home = () => {
   const [nowPage, setNowPage] = useState<number>(
     parseInt(location.search.split("=")[1]) || 1
   );
+  const [valuesFilter, setValuesFilter] = useState<string[]>([]);
+
   const [typeSort, setTypeSort] = useState<string>("");
   const limit = 50;
 
-  // students.sort((firstItem, secondItem) => firstItem.grade - secondItem.grade);
+  useEffect(() => {
+    //???
+  }, [valuesFilter])
 
   useEffect(() => {
    
@@ -124,6 +130,7 @@ const Home = () => {
       <HomeStyle>
         <TitleStyle>Vehicles</TitleStyle>
         <ContainerListStyle>
+          <FilterLine valuesFilter={valuesFilter} setValuesFilter={setValuesFilter}/>
           <SortLine typeSort={typeSort} setTypeSort={setTypeSort} />
           <ListCardStyle>
             {listVehicles &&

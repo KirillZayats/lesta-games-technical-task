@@ -10,8 +10,6 @@ const SortLineStyle = styled.section`
   flex-direction: row;
   height: 50px;
   background: ${({ theme }) => theme.colors.SECOND_BG_COLOR};
-  margin: 20px auto 0px;
-
   text-align: center;
   cursor: pointer;
 `;

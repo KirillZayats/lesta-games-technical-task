@@ -38,7 +38,12 @@ export enum TypeSort {
   NAME_DESC = "NAME_DESC",
   TYPE_ASC = "TYPE_ASC",
   TYPE_DESC = "TYPE_DESC",
+}
 
+export enum TypeFilter {
+  NATION_FILTER = "NATION_FILTER",
+  TYPE_FILTER = "TYPE_FILTER",
+  LEVEL_FILTER = "LEVEL_FILTER",
 }
 
 export const LINK_LINKEDIN = 'https://www.linkedin.com/in/kiryl-zayats';
