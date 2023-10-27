@@ -13,9 +13,9 @@ export interface IPropsSort {
   setTypeSort: (value: string) => void;
 }
 
+
 export interface IPropsFilter {
-  valuesFilter: string[];
-  setValuesFilter: (value: string[]) => void;
+  setNowPage: (value: number) => void;
 }
 
 
@@ -37,6 +37,20 @@ export interface IDataFilter {
   name: string;
   icon: string;
 }
+
+export type TGetUseDataFilter = (value: string,
+  isStatus: boolean,
+  startData: IVehicles[],
+  useData: IVehicles[],
+  map: Map<string, IDataFilter[] | Omit<IDataFilter, "icon">[]>) => IVehicles[];
+
+export type TMainFilter = (useData: IVehicles[], startData: IVehicles[]) => IVehicles[];
+export type TUseFilterType = (useData: IVehicles[], startData: IVehicles[]) => {data: IVehicles[]; statusEntry: boolean}
+export type TUseFilterLevel = (useData: IVehicles[], startData: IVehicles[], statusEntry: boolean) => IVehicles[]
+
+
+export type TMapValuesFilter =(typeFilter: string, value: string) => void
+
 
 type TIcons = {
   large: string;

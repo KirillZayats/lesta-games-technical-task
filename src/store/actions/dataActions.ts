@@ -1,6 +1,6 @@
 import { BASE_URL, query } from "../../additionally/constants";
 import { IVehicles } from "../../additionally/interfaces";
-import { DataActionType, IGetDataAction } from "../types";
+import { DataAction, DataActionType } from "../types";
 
 export const getData = () => {
     
@@ -25,10 +25,25 @@ export const getData = () => {
     }
 }
 
-export const getDataSuccess = (data: IVehicles[]): IGetDataAction => {
+export const getDataSuccess = (data: IVehicles[]): DataAction => {
     return {
         type: DataActionType.GET_DATA,
         data: data,
         isLoading: true,
+    }
+}
+
+export const changeArrayFilter = (value: string, status: boolean): DataAction => {
+    return {
+        type: DataActionType.CHANGE_FILTER,
+        value: value,
+        status: status
+    }
+}
+
+export const sortData = (typeSort: string): DataAction => {
+    return {
+        type: DataActionType.SORT_DATA,
+        typeSort: typeSort,
     }
 }

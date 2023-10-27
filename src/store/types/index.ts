@@ -1,7 +1,9 @@
 import { IVehicles } from "../../additionally/interfaces";
 
 export enum DataActionType {
-    GET_DATA = "GET_DATA"
+    GET_DATA = "GET_DATA",
+    CHANGE_FILTER = "CHANGE_FILTER",
+    SORT_DATA = "SORT_DATA"
 }
 
  export interface IGetDataAction {
@@ -10,4 +12,15 @@ export enum DataActionType {
     data: IVehicles[],
 };
 
-export type DataAction = IGetDataAction; 
+export interface IChangeArrayFilter {
+    type: DataActionType.CHANGE_FILTER,
+    value: string,
+    status: boolean
+}
+
+export interface ISortData {
+    type: DataActionType.SORT_DATA,
+    typeSort: string,
+}
+
+export type DataAction = IGetDataAction | IChangeArrayFilter | ISortData; 
