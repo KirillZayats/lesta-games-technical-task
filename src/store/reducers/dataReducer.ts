@@ -7,6 +7,10 @@ import {
   TMainFilter,
   TUseFilterLevel,
   TUseFilterType,
+  TGetMapFilter,
+  TGetTypeFilter,
+  TFindTypeFilter,
+  TSortData,
 } from "../../additionally/interfaces";
 import { DataAction, DataActionType } from "../types";
 
@@ -18,91 +22,66 @@ const initialState = {
   mapValuesFilter: new Map<string, string[]>(),
 };
 
-const sortData = (data: IVehicles[], typeSort: string): IVehicles[] => {
+const sortData: TSortData = (data, typeSort) => {
   let dataSort: IVehicles[] = [...data];
-    switch (typeSort) {
-      case TypeSort.NATION_ASC:
-  
-          dataSort.sort((firstItem, secondItem) =>
-            firstItem.nation.name.toLowerCase() <
-            secondItem.nation.name.toLowerCase()
-              ? -1
-              : 1
-          
-        );
-        break;
-      case TypeSort.NATION_DESC:
-        
-          dataSort.sort((firstItem, secondItem) =>
-            firstItem.nation.name.toLowerCase() <
-            secondItem.nation.name.toLowerCase()
-              ? 1
-              : -1
-       
-        );
-        break;
-      case TypeSort.TYPE_ASC:
-        
-          dataSort.sort((firstItem, secondItem) =>
-            firstItem.type.name.toLowerCase() <
-            secondItem.type.name.toLowerCase()
-              ? -1
-              : 1
-          
-        );
-        break;
-      case TypeSort.TYPE_DESC:
-        
-          dataSort.sort((firstItem, secondItem) =>
-            firstItem.type.name.toLowerCase() <
-            secondItem.type.name.toLowerCase()
-              ? 1
-              : -1
-          
-        );
-        break;
-      case TypeSort.LEVEL_ASC:
-        
-          dataSort.sort(
-            (firstItem, secondItem) => secondItem.level - firstItem.level
-          
-        );
-        break;
-      case TypeSort.LEVEL_DESC:
-        
-          dataSort.sort(
-            (firstItem, secondItem) => firstItem.level - secondItem.level
-          
-        );
-        break;
-      case TypeSort.NAME_ASC:
-        
-          dataSort.sort((firstItem, secondItem) =>
-            firstItem.title.toLowerCase() < secondItem.title.toLowerCase()
-              ? 1
-              : -1
-          
-        );
-        break;
-      case TypeSort.NAME_DESC:
-        
-          dataSort.sort((firstItem, secondItem) =>
-            firstItem.title.toLowerCase() < secondItem.title.toLowerCase()
-              ? -1
-              : 1
-          
-        );
-        break;
-      default:
-        break;
-    }
-    return dataSort;
+  switch (typeSort) {
+    case TypeSort.NATION_ASC:
+      dataSort.sort((firstItem, secondItem) =>
+        firstItem.nation.name.toLowerCase() <
+        secondItem.nation.name.toLowerCase()
+          ? -1
+          : 1
+      );
+      break;
+    case TypeSort.NATION_DESC:
+      dataSort.sort((firstItem, secondItem) =>
+        firstItem.nation.name.toLowerCase() <
+        secondItem.nation.name.toLowerCase()
+          ? 1
+          : -1
+      );
+      break;
+    case TypeSort.TYPE_ASC:
+      dataSort.sort((firstItem, secondItem) =>
+        firstItem.type.name.toLowerCase() < secondItem.type.name.toLowerCase()
+          ? -1
+          : 1
+      );
+      break;
+    case TypeSort.TYPE_DESC:
+      dataSort.sort((firstItem, secondItem) =>
+        firstItem.type.name.toLowerCase() < secondItem.type.name.toLowerCase()
+          ? 1
+          : -1
+      );
+      break;
+    case TypeSort.LEVEL_ASC:
+      dataSort.sort(
+        (firstItem, secondItem) => secondItem.level - firstItem.level
+      );
+      break;
+    case TypeSort.LEVEL_DESC:
+      dataSort.sort(
+        (firstItem, secondItem) => firstItem.level - secondItem.level
+      );
+      break;
+    case TypeSort.NAME_ASC:
+      dataSort.sort((firstItem, secondItem) =>
+        firstItem.title.toLowerCase() < secondItem.title.toLowerCase() ? 1 : -1
+      );
+      break;
+    case TypeSort.NAME_DESC:
+      dataSort.sort((firstItem, secondItem) =>
+        firstItem.title.toLowerCase() < secondItem.title.toLowerCase() ? -1 : 1
+      );
+      break;
+    default:
+      break;
   }
+  return dataSort;
+};
 
-
-const getMapFilter = (
-  data: IVehicles[]
-): Map<string, IDataFilter[] | Omit<IDataFilter, "icon">[]> => {
+const getMapFilter: TGetMapFilter = (data) => {
   const map = new Map<string, IDataFilter[] | Omit<IDataFilter, "icon">[]>();
   const countLevel = 11;
   const level: Omit<IDataFilter, "icon">[] = [];
@@ -144,10 +123,15 @@ const getUseDataFilter: TGetUseDataFilter = (
   } else {
     deleteMapValuesFilter(typeFilter, value);
     if (
-      (initialState.mapValuesFilter.get(TypeFilter.NATION_FILTER)?.length === 0 || !initialState.mapValuesFilter.get(TypeFilter.NATION_FILTER)) &&
-      (initialState.mapValuesFilter.get(TypeFilter.TYPE_FILTER)?.length === 0 || !initialState.mapValuesFilter.get(TypeFilter.TYPE_FILTER)) &&
-      (initialState.mapValuesFilter.get(TypeFilter.LEVEL_FILTER)?.length === 0 || !initialState.mapValuesFilter.get(TypeFilter.LEVEL_FILTER))
-    ) {      
+      (initialState.mapValuesFilter.get(TypeFilter.NATION_FILTER)?.length ===
+        0 ||
+        !initialState.mapValuesFilter.get(TypeFilter.NATION_FILTER)) &&
+      (initialState.mapValuesFilter.get(TypeFilter.TYPE_FILTER)?.length === 0 ||
+        !initialState.mapValuesFilter.get(TypeFilter.TYPE_FILTER)) &&
+      (initialState.mapValuesFilter.get(TypeFilter.LEVEL_FILTER)?.length ===
+        0 ||
+        !initialState.mapValuesFilter.get(TypeFilter.LEVEL_FILTER))
+    ) {
       useData = [...startData];
     } else {
       useData = [...applyFilterAll(useData, startData)];
@@ -258,7 +242,6 @@ const deleteMapValuesFilter: TMapValuesFilter = (typeFilter, value) => {
       .get(typeFilter)!
       .filter((item) => item !== value),
   ]);
-  console.log(initialState.mapValuesFilter);
 };
 
 const addMapValuesFilter: TMapValuesFilter = (typeFilter, value) => {
@@ -301,10 +284,7 @@ const addMapValuesFilter: TMapValuesFilter = (typeFilter, value) => {
   }
 };
 
-const getTypeFilter = (
-  map: Map<string, IDataFilter[] | Omit<IDataFilter, "icon">[]>,
-  value: string
-): string => {
+const getTypeFilter: TGetTypeFilter = (map, value) => {
   let typeFilter: string = findTypeFilter(
     map.get(TypeFilter.NATION_FILTER)!,
     value,
@@ -327,11 +307,7 @@ const getTypeFilter = (
   return typeFilter;
 };
 
-const findTypeFilter = (
-  array: IDataFilter[] | Omit<IDataFilter, "icon">[],
-  value: string,
-  typeFilter: string
-): string => {
+const findTypeFilter: TFindTypeFilter = (array, value, typeFilter) => {
   let type = "";
   for (let index = 0; index < array!.length; index++) {
     if (array![index].name === value) {
@@ -342,8 +318,16 @@ const findTypeFilter = (
   return type;
 };
 
-export const dataReducer = (state = initialState, action: DataAction) => {
+export const dataReducer = (state = initialState, action: DataAction) => {  
   switch (action.type) {
+    case DataActionType.INIT_DATA:
+      initialState.mapValuesFilter = new Map<string, string[]>();
+      return {
+        startData: state.startData,
+        useData: [...state.startData],
+        isLoading: state.isLoading,
+        mapTypesFilter: state.mapTypesFilter,
+      };
     case DataActionType.GET_DATA:
       return {
         startData: [...action.data],
@@ -366,13 +350,13 @@ export const dataReducer = (state = initialState, action: DataAction) => {
         isLoading: state.isLoading,
         mapTypesFilter: state.mapTypesFilter,
       };
-      case DataActionType.SORT_DATA:
-        return {
-          startData: state.startData,
-          useData: [...sortData(state.useData, action.typeSort)],
-          isLoading: state.isLoading,
-          mapTypesFilter: state.mapTypesFilter,
-        };
+    case DataActionType.SORT_DATA:
+      return {
+        startData: state.startData,
+        useData: [...sortData(state.useData, action.typeSort)],
+        isLoading: state.isLoading,
+        mapTypesFilter: state.mapTypesFilter,
+      };
     default:
       return state;
   }

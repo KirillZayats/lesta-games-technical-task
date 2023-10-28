@@ -5,10 +5,13 @@ import {
   LogotypeStyle,
   LinkStyle,
 } from "../styles/header/LogotypeStyled";
+import { useAction } from "../hooks/useAction";
 
 const Logotype = () => {
+  const { setUrl } = useAction();
+
   return (
-    <LinkStyle to={"/"}>
+    <LinkStyle to={"/"} onClick={() => setUrl('/')}>
       <LogotypeStyle>
         <Iconlogotype />
         <NameLogotypeStyle>Lesta Games</NameLogotypeStyle>

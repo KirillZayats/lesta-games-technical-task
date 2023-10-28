@@ -1,15 +1,30 @@
 import styled from "styled-components";
+import { device, size } from "../media/MediaQueryStyled";
 
 const FilterLineStyle = styled.section`
-  width: calc(100% - 40px);
-  /* height: 50px; */
   background: ${({ theme }) => theme.colors.SECOND_BG_COLOR};
+  width: 100%;
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
   padding: 10px 20px;
   gap: 30px;
   cursor: pointer;
+  position: absolute;
+  z-index: 3;
+  flex-direction: row;
+
+   @media ${device.mobileS} {
+    &:hover {
+      flex-direction: column;
+
+  }  }
+
+  @media ${device.tablet} {
+    &:hover {
+      flex-direction: row;
+
+  }  }
 
   &:hover li {
     opacity: 1;
@@ -25,18 +40,53 @@ const FilterLineStyle = styled.section`
     height: 20px;
     border-bottom: none;
     margin-bottom: 20px;
+  }
 
+  @media ${device.mobileS} {
+    max-width: calc(100% - 60px);
+  }
+
+  @media ${device.mobileM} {
+    max-width: calc(${size.mobileM} - 70px);
+  }
+
+  @media ${device.mobileL} {
+    max-width: calc(${size.mobileL} - 90px);
+  }
+
+  @media ${device.tablet} {
+    max-width: calc(${size.tablet} - 90px);
+    gap: 60px;
+  }
+  @media ${device.tabletS} {
+    max-width: calc(${size.tabletS} - 90px);
+  }
+
+  @media ${device.laptop} {
+    max-width: calc(${size.laptop} - 90px);
+  }
+
+  @media ${device.desktop} {
+    max-width: calc(${size.desktop} - 340px);
   }
 `;
 
 const ListStyle = styled.ul`
   display: flex;
   flex-direction: column;
-  min-width: 70px;
 
   .active-element {
     background: ${({ theme }) => theme.colors.HOVER_TEXT_COLOR};
   }
+  min-width: 70px;
+
+  /* @media ${device.mobileS} {
+    min-width: 40px;
+  }
+
+  @media ${device.tablet} {
+    min-width: 70px;
+  } */
 `;
 const ElementsListStyle = styled.li`
   transition: 0.3s ease-out;
@@ -55,6 +105,7 @@ const ElementsListStyle = styled.li`
     background: none;
   }
 `;
+
 const NationStyle = styled.div`
   display: flex;
   flex-direction: row;
@@ -62,7 +113,16 @@ const NationStyle = styled.div`
   height: 20px;
 `;
 const NationIconStyle = styled.img``;
-const NationNameStyle = styled.span``;
+const NationNameStyle = styled.span`
+/* 
+@media ${device.mobileS} {
+    font-size: 12px;
+  }
+      @media ${device.tablet} {
+      font-size: 16px;
+} */
+
+`;
 
 export {
     NationIconStyle,

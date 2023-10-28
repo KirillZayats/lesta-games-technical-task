@@ -11,6 +11,7 @@ const Footer = lazy(() => import("./components/footer/Footer"));
 
 const Home = lazy(() => import("./pages/Home"));
 const Contacts = lazy(() => import("./pages/Contacts"));
+const DownUp = lazy(() => import("./components/DownUp"));
 
 const App = () => {
   const { isLoading } = useSelector((state: any) => state.data);
@@ -37,9 +38,10 @@ const App = () => {
             <Routes>
               <Route path={`/`} element={<Home />} />
               <Route path={`/contacts`} element={<Contacts />} />
-              <Route path={`*`} element={<NotFound/>}/>
+              <Route path={`/*`} element={<NotFound/>}/>
             </Routes>
             <Footer />
+            <DownUp/>
           </ContainerProvider>
         )}
       </Suspense>

@@ -47,3 +47,9 @@ export const sortData = (typeSort: string): DataAction => {
         typeSort: typeSort,
     }
 }
+
+export const initData = (): DataAction => {
+    return {
+        type: DataActionType.INIT_DATA
+    }
+}

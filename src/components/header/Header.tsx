@@ -10,18 +10,15 @@ import Logotype from "../Logotype";
 import Sidebar from "./Sidebar";
 import { InputCheckBoxStyle } from "../../styles/header/SidebarStyled";
 import { useLocation } from "react-router-dom";
+import { useAction } from "../../hooks/useAction";
 
 const Header = () => {
   const [widthWindow, setWidthWindow] = useState(window.innerWidth);
   const [buttonDownUp, setButtonDownUp] = useState<HTMLElement | null>(null);
   const { pathname } = useLocation();
+  const { setUrl } = useAction();
 
   const [listNav, setListNav] = useState(["Home", "Contacts"]);
-
-
-  useEffect(() => {
-    setActiveElementNav();
-  }, [listNav]);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -36,23 +33,8 @@ const Header = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    closeSidebar();
+    closeSidebar();    
   }, [pathname]);
-
-  const setActiveElementNav = () => {
-    document.querySelector(".active") &&
-      document.querySelector(".active")?.classList.remove("active");
-    let noActiveContainers = document.querySelectorAll(".no-active");
-    if (noActiveContainers && noActiveContainers.length > 0) {
-      if (pathname.includes("works")) {
-        noActiveContainers[1].classList.add("active");
-      } else if (pathname.includes("about")) {
-        noActiveContainers[2].classList.add("active");
-      } else {
-        noActiveContainers[0].classList.add("active");
-      }
-    }
-  };
 
   function closeSidebar() {
     let inputCheckbox = document.getElementById("checked") as HTMLInputElement;
@@ -84,18 +66,20 @@ const Header = () => {
     }
   };
 
+  const setNewUrl = (event: any) => {
+    closeSidebar();    
+    event.target.innerHTML === 'Home' && setUrl('/');
+  };
+
   return widthWindow >= 1024 ? (
     <HeaderStyle>
       <ContainerStyle>
         <Logotype />
         <NavStyle>
-          <ListNavStyle>
+          <ListNavStyle onClick={setNewUrl}>
             {listNav &&
               listNav.map((element, index) => (
-                <ElementList
-                  key={index}
-                  textElement={element}
-                />
+                <ElementList key={index} textElement={element} />
               ))}
           </ListNavStyle>
         </NavStyle>
@@ -108,13 +92,10 @@ const Header = () => {
         <InputCheckBoxStyle type="checkbox" id="checked" />
         <Sidebar />
         <NavStyle>
-          <ListNavStyle>
+          <ListNavStyle onClick={setNewUrl}>
             {listNav &&
               listNav.map((element, index) => (
-                <ElementList
-                  key={index}
-                  textElement={element}
-                />
+                <ElementList key={index} textElement={element} />
               ))}
           </ListNavStyle>
         </NavStyle>

@@ -7,10 +7,12 @@ import {
   ImageViewStyle,
   CardVehiclesStyle,
   TextStyle,
-  LabelStyle
+  LabelStyle,
+  TextDescriptionStyle,
+  LabelTitleStyle
 } from "../../styles/home/CardVehiclesStyled";
 
-const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page, typeSort }) => {
+const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page, listVehicles }) => {
   const [partId, setPartId] = useState<string>('');
   const [card, setCard] = useState<HTMLElement | null>();
   const [name, setName] = useState<HTMLElement | null>();
@@ -46,7 +48,7 @@ const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page, typeSort }) =>
 
   useEffect(() => {
     deleteView();
-  }, [page, typeSort])
+  }, [page, listVehicles])
 
   const clickCard = () => {
     card && card.classList.toggle("card-active");
@@ -163,18 +165,18 @@ const CardVehicles: React.FC<IPropsVehicles> = ({ vehicles, page, typeSort }) =>
           id={`${partId}_view`}
           className="view-no-active"
         />
-        <LabelStyle className="name-no-active" id={`${partId}_name`}>
+        <LabelTitleStyle className="name-no-active" id={`${partId}_name`}>
           {vehicles && vehicles.title}
-        </LabelStyle>
+        </LabelTitleStyle>
         <LabelStyle className="nation_name-no-active" id={`${partId}_nation_name`}>
           Nation:
         </LabelStyle>
         <LabelStyle className="nation_title-no-active" id={`${partId}_nation_title`}>
           {vehicles && vehicles.nation.title}
         </LabelStyle>
-        <TextStyle className="description-no-active" id={`${partId}_description`}>
+        <TextDescriptionStyle className="description-no-active" id={`${partId}_description`}>
           {vehicles && vehicles.description}
-        </TextStyle>
+        </TextDescriptionStyle>
       </CardVehiclesStyle>
     </ElementListStyle>
   );

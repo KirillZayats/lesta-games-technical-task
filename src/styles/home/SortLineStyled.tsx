@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Icon from "../Icon";
+import { device, size } from "../../styles/media/MediaQueryStyled";
 
 const SortLineStyle = styled.section`
   display: flex;
@@ -8,6 +9,7 @@ const SortLineStyle = styled.section`
   background: ${({ theme }) => theme.colors.SECOND_BG_COLOR};
   text-align: center;
   cursor: pointer;
+  margin-top: 60px;
 `;
 
 const FieldNationStyle = styled.div`
@@ -19,6 +21,15 @@ const FieldNationStyle = styled.div`
   justify-content: center;
   gap: 5px;
   align-items: center;
+
+  @media ${device.mobileS} {
+    width: 60px;
+  }
+
+  @media ${device.tablet} {
+    width: 120px;
+
+  }
 `;
 
 
@@ -48,13 +59,19 @@ const FieldLevelStyle = styled.div`
 `;
 
 const FieldNameStyle = styled.div`
-  margin-left: 20px;
   display: flex;
   flex-direction: row;
   gap: 5px;
   align-items: center;
   justify-content: center;
 
+  @media ${device.mobileS} {
+    margin-left: 10px;
+  }
+
+  @media ${device.tablet} {
+    margin-left: 20px;
+  }
 `;
 
 const SvgSortNation = styled(Icon)`
