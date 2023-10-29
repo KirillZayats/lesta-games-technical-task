@@ -44,6 +44,10 @@ export interface IPropsFilter {
   setNowPage: (value: number) => void;
 }
 
+export interface IPropsPageError {
+  errorMessage: string;
+}
+
 export interface IPropsBg {
   background: string | undefined;
 }

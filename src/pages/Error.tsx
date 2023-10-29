@@ -2,6 +2,7 @@ import React from 'react'
 import { ContainerPageStyle } from '../styles/AppStyled'
 import styled from 'styled-components'
 import imageError from '../resources/error.png';
+import { IPropsPageError } from '../additionally/interfaces';
 
 const NotFoundStyle = styled.article`
   display: flex;
@@ -18,17 +19,17 @@ const ImageStyle = styled.img`
 const TitleErrorStyle = styled.h2`
   
 `;
-const NotFound = () => {
+const Error: React.FC<IPropsPageError> = ({errorMessage = ''}) => {
   return (
     <ContainerPageStyle>
         <NotFoundStyle>
         <ImageStyle src={imageError}/>
         <TitleErrorStyle>
-        404 - page not found
+        {errorMessage ? errorMessage : '404 - page not found'}
         </TitleErrorStyle>
         </NotFoundStyle>
     </ContainerPageStyle>
   )
 }
 
-export default NotFound
+export default Error

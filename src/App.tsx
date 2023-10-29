@@ -1,10 +1,14 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import { useEffect, Suspense, lazy } from "react";
 import { useAction } from "./hooks/useAction";
 import { Theme } from "./styles/Theme";
-import { ContainerProvider, GlobalStyle } from "./styles/AppStyled";
+import {
+  ContainerLoader,
+  ContainerProvider,
+  GlobalStyle,
+} from "./styles/AppStyled";
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import NotFound from "./pages/NotFound";
+import { Blocks } from "react-loader-spinner";
 
 const Header = lazy(() => import("./components/header/Header"));
 const Footer = lazy(() => import("./components/footer/Footer"));
@@ -12,13 +16,14 @@ const Footer = lazy(() => import("./components/footer/Footer"));
 const Home = lazy(() => import("./pages/Home"));
 const Contacts = lazy(() => import("./pages/Contacts"));
 const DownUp = lazy(() => import("./components/DownUp"));
+const Error = lazy(() => import("./pages/Error"));
 
 const App = () => {
-  const { isLoading } = useSelector((state: any) => state.data);
+  const { isLoading, errorMessage } = useSelector((state: any) => state.data);
 
   const { getData } = useAction();
   useEffect(() => {
-    getData();    
+    getData();
   }, []);
 
   return (
@@ -26,23 +31,39 @@ const App = () => {
       <GlobalStyle />
       <Suspense
         fallback={
-          // <ContainerLoader>
-          //   <InfinitySpin width="200" color="#fff" />
-          // </ContainerLoader>
-          <div>Заглушка</div>
+          <ContainerLoader>
+            <Blocks
+              visible={true}
+              height="200"
+              width="200"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+            />
+          </ContainerLoader>
         }
       >
-        {isLoading && (
+        {isLoading ? (
           <ContainerProvider>
             <Header />
             <Routes>
               <Route path={`/`} element={<Home />} />
               <Route path={`/contacts`} element={<Contacts />} />
-              <Route path={`/*`} element={<NotFound/>}/>
+              <Route path={`/*`} element={<Error errorMessage=''/>} />
             </Routes>
             <Footer />
-            <DownUp/>
+            <DownUp />
           </ContainerProvider>
+        ) :
+        (
+          <ContainerProvider>
+          <Header />
+          <Routes>
+            <Route path={`/`} element={<Error errorMessage={errorMessage} />} />
+            <Route path={`/contacts`} element={<Contacts />} />
+          </Routes>
+          <Footer />
+        </ContainerProvider>
         )}
       </Suspense>
     </Theme>

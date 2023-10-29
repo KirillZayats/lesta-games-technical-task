@@ -53,14 +53,14 @@ const Header = () => {
   };
 
   const viewButtonDownUp = () => {
-    if (buttonDownUp != null) {
+    if (buttonDownUp) {
       buttonDownUp.style.opacity = "1";
       buttonDownUp.style.bottom = "20px";
     }
   };
 
   const hideButtonDownUp = () => {
-    if (buttonDownUp != null) {
+    if (buttonDownUp) {
       buttonDownUp.style.opacity = "0";
       buttonDownUp.style.bottom = "-50px";
     }

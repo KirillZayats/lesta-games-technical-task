@@ -20,6 +20,7 @@ const initialState = {
   useData: [],
   mapTypesFilter: new Map<string, IDataFilter[] | Omit<IDataFilter, "icon">[]>(),
   mapValuesFilter: new Map<string, string[]>(),
+  errorMessage: '',
 };
 
 const sortData: TSortData = (data, typeSort) => {
@@ -335,6 +336,13 @@ export const dataReducer = (state = initialState, action: DataAction) => {
         isLoading: action.isLoading,
         mapTypesFilter: getMapFilter(action.data),
       };
+      case DataActionType.ERROR_DATA:
+        return {
+          startData: [],
+          useData: [],
+          isLoading: action.isLoading,
+          errorMessage: action.errorMessage,
+        };
     case DataActionType.CHANGE_FILTER:
       return {
         startData: state.startData,

@@ -14,7 +14,7 @@ import {
   HomeStyle,
   TitleStyle,
 } from "../styles/pages/HomeStyled";
-import NotFound from "./NotFound";
+import Error from "./Error";
 
 const Home = () => {
   const location = useLocation();
@@ -128,7 +128,7 @@ const Home = () => {
       </HomeStyle>
     </ContainerPageStyle>
   ) : (
-    <NotFound />
+    <Error errorMessage="404 - No data"/>
   );
 };
 

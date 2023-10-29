@@ -96,8 +96,18 @@ const ContainerPageStyle = styled.main`
 
 const ContainerProvider = styled.div``;
 
+const ContainerLoader = styled.div`
+  margin: auto;
+  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
 export {
   GlobalStyle, 
   ContainerProvider,
-  ContainerPageStyle
+  ContainerPageStyle,
+  ContainerLoader
 }

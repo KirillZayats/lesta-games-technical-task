@@ -14,14 +14,25 @@ export const getData = () => {
           })
             .then(response => {                
                 if(!response.ok) {
-                    throw new Error(response.statusText)
+                    console.error(response.statusText);  
+                    return 'Error - No connection to server';
                 }
                 return response;
             })
-            .then(response => response.json())
-            .then(data => {                
-                dispatch(getDataSuccess(data.data.vehicles))
+            .then(response => {                
+                return typeof response === 'string' ? response : response.json()
             })
+            .then(data => {  
+                dispatch(typeof data === 'string' ? dispatch(errorData(data)) : getDataSuccess(data.data.vehicles))
+            })
+    }
+}
+
+export const errorData = (errorMessage: string): DataAction => {
+    return {
+        type: DataActionType.ERROR_DATA,
+        isLoading: false,
+        errorMessage: errorMessage
     }
 }
 
