@@ -47,7 +47,6 @@ const FieldTypeStyle = styled.div`
 `;
 
 const FieldLevelStyle = styled.div`
-  width: 50px;
   border-right: 1px solid ${({ theme }) => theme.colors.HALF_TEXT_COLOR};
   height: 100%;
   display: flex;
@@ -55,7 +54,13 @@ const FieldLevelStyle = styled.div`
   gap: 5px;
   align-items: center;
   justify-content: center;
+  @media ${device.mobileS} {
+    width: 45px;
+  }
 
+  @media ${device.mobileM} {
+    width: 55px;
+  }
 `;
 
 const FieldNameStyle = styled.div`

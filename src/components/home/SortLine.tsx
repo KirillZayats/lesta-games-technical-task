@@ -79,7 +79,7 @@ const SortLine: React.FC<IPropsSort> = ({typeSort, setTypeSort}) => {
         <IconType />
       </FieldTypeStyle>
       <FieldLevelStyle onClick={setLevel}>
-        <TextSortStyle>1-10</TextSortStyle>
+        <TextSortStyle>1-11</TextSortStyle>
       </FieldLevelStyle>
       <FieldNameStyle onClick={setName}>
         <TextSortStyle>Name Ship</TextSortStyle>

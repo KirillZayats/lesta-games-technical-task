@@ -31,7 +31,7 @@ const Contacts = () => {
         <TitleStyle>Contact Information</TitleStyle>
         <ContainerInfoStyle>
           <TextStyle>
-            Hi! My name's Kirill. If you have any questions, you can write to
+            Hi! My name's Kiryl. If you have any questions, you can write to
             me. I will be very glad to each of your questions :)
           </TextStyle>
           <SocialLinksStyle>
