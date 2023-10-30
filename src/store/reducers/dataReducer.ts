@@ -328,6 +328,8 @@ export const dataReducer = (state = initialState, action: DataAction) => {
         useData: [...state.startData],
         isLoading: state.isLoading,
         mapTypesFilter: state.mapTypesFilter,
+        errorMessage: state.errorMessage,
+
       };
     case DataActionType.GET_DATA:
       return {
@@ -335,8 +337,10 @@ export const dataReducer = (state = initialState, action: DataAction) => {
         useData: [...action.data],
         isLoading: action.isLoading,
         mapTypesFilter: getMapFilter(action.data),
+        errorMessage: state.errorMessage,
+
       };
-      case DataActionType.ERROR_DATA:
+      case DataActionType.ERROR_DATA:        
         return {
           startData: [],
           useData: [],
@@ -357,6 +361,7 @@ export const dataReducer = (state = initialState, action: DataAction) => {
         ],
         isLoading: state.isLoading,
         mapTypesFilter: state.mapTypesFilter,
+        errorMessage: state.errorMessage,
       };
     case DataActionType.SORT_DATA:
       return {
@@ -364,6 +369,7 @@ export const dataReducer = (state = initialState, action: DataAction) => {
         useData: [...sortData(state.useData, action.typeSort)],
         isLoading: state.isLoading,
         mapTypesFilter: state.mapTypesFilter,
+        errorMessage: state.errorMessage,
       };
     default:
       return state;

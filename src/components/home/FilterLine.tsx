@@ -44,7 +44,7 @@ const FilterLine: React.FC<IPropsFilter> = ({setNowPage}) => {
         <ElementsListStyle>
           <NationNameStyle>Nation</NationNameStyle>
         </ElementsListStyle>
-        {mapTypesFilter
+        {mapTypesFilter && mapTypesFilter
           .get(TypeFilter.NATION_FILTER)
           .map((element: IDataFilter, index: number) => (
             <ElementsListStyle key={index} onClick={changeStatusFilter}>
@@ -59,7 +59,7 @@ const FilterLine: React.FC<IPropsFilter> = ({setNowPage}) => {
         <ElementsListStyle>
           <NationNameStyle>Type</NationNameStyle>
         </ElementsListStyle>
-        {mapTypesFilter
+        {mapTypesFilter && mapTypesFilter
           .get(TypeFilter.TYPE_FILTER)
           .map((element: IDataFilter, index: number) => (
             <ElementsListStyle key={index} onClick={changeStatusFilter}>
@@ -74,7 +74,7 @@ const FilterLine: React.FC<IPropsFilter> = ({setNowPage}) => {
         <ElementsListStyle>
           <NationNameStyle>Level</NationNameStyle>
         </ElementsListStyle>
-        {mapTypesFilter
+        {mapTypesFilter && mapTypesFilter
           .get(TypeFilter.LEVEL_FILTER)
           .map((element: IDataFilter | Omit<IDataFilter, 'icon'>, index: number) => (
             <ElementsListStyle key={index} onClick={changeStatusFilter}>

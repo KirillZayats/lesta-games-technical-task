@@ -43,7 +43,7 @@ const App = () => {
           </ContainerLoader>
         }
       >
-        {isLoading ? (
+        {isLoading && (
           <ContainerProvider>
             <Header />
             <Routes>
@@ -54,16 +54,6 @@ const App = () => {
             <Footer />
             <DownUp />
           </ContainerProvider>
-        ) :
-        (
-          <ContainerProvider>
-          <Header />
-          <Routes>
-            <Route path={`/`} element={<Error errorMessage={errorMessage} />} />
-            <Route path={`/contacts`} element={<Contacts />} />
-          </Routes>
-          <Footer />
-        </ContainerProvider>
         )}
       </Suspense>
     </Theme>

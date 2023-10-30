@@ -46,9 +46,16 @@ margin-top: 20px;
   }
 `;
 
+const MessageStyle = styled.p`
+  text-align: center;
+  font-size: 20px;
+  margin: 20px auto; 
+`;
+
 export {
     ContainerListStyle,
     ListCardStyle,
     HomeStyle,
-    TitleStyle
+    TitleStyle,
+    MessageStyle
 }

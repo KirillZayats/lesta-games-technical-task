@@ -2,8 +2,7 @@ import { BASE_URL, query } from "../../additionally/constants";
 import { IVehicles } from "../../additionally/interfaces";
 import { DataAction, DataActionType } from "../types";
 
-export const getData = () => {
-    
+export const getData = () => { 
     return async (dispatch: any) => {
         return fetch(BASE_URL, {
             method: 'POST',
@@ -12,26 +11,29 @@ export const getData = () => {
             },
             body: JSON.stringify({ query }),
           })
-            .then(response => {                
-                if(!response.ok) {
-                    console.error(response.statusText);  
-                    return 'Error - No connection to server';
-                }
-                return response;
-            })
-            .then(response => {                
-                return typeof response === 'string' ? response : response.json()
-            })
-            .then(data => {  
-                dispatch(typeof data === 'string' ? dispatch(errorData(data)) : getDataSuccess(data.data.vehicles))
-            })
+          .then(response => {                                
+            if(!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response;
+        })
+        .then(response => {                                
+            return response.json()
+        })
+        .then(data => {  
+            dispatch(getDataSuccess(data.data.vehicles))
+        })
+        .catch(error => {
+            console.log(error);      
+            dispatch(errorData('Error - No connection to server'))              
+        })
     }
 }
 
 export const errorData = (errorMessage: string): DataAction => {
     return {
         type: DataActionType.ERROR_DATA,
-        isLoading: false,
+        isLoading: true,
         errorMessage: errorMessage
     }
 }

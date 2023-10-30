@@ -13,6 +13,7 @@ import {
   ListCardStyle,
   HomeStyle,
   TitleStyle,
+  MessageStyle,
 } from "../styles/pages/HomeStyled";
 import Error from "./Error";
 
@@ -20,8 +21,8 @@ const Home = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { useData, isLoading } = userTypeSelector((state: any) => state.data);
-  const {url} = userTypeSelector((state: any) => state.page)
+  const { useData, isLoading, startData, errorMessage } = userTypeSelector((state: any) => state.data);
+  const { url } = userTypeSelector((state: any) => state.page);
   const { sortData, setUrl, initData } = useAction();
 
   const [listVehicles, setListVehicles] = useState<IVehicles[]>();
@@ -37,19 +38,18 @@ const Home = () => {
   }, [typeSort]);
 
   useEffect(() => {
-    if(url === '/') {
+    if (url === "/") {
       setIsStatusPage(true);
       setNowPage(1);
-    } 
+    }
     initData();
-  }, [url])
+  }, [url]);
 
   useEffect(() => {
-    getDataPage(useData);        
+    getDataPage(useData);
   }, [isLoading, useData]);
 
-  useEffect(() => {    
-
+  useEffect(() => {
     if (
       location.search &&
       (Number.isNaN(parseInt(location.search.split("=")[1])) ||
@@ -58,18 +58,17 @@ const Home = () => {
           Math.ceil(useData.length / limit))
     ) {
       setIsStatusPage(false);
-      setUrl('/*');
+      setUrl("/*");
     }
   }, [location]);
 
   useEffect(() => {
-    getDataPage(useData);    
+    getDataPage(useData);
     if (
       location.search &&
-      (
-        parseInt(location.search.split("=")[1]) > 0 &&
-        parseInt(location.search.split("=")[1]) <=
-          Math.ceil(useData.length / limit))
+      parseInt(location.search.split("=")[1]) > 0 &&
+      parseInt(location.search.split("=")[1]) <=
+        Math.ceil(useData.length / limit)
     ) {
       if (`?page=${nowPage}` === "?page=1") navigate(`?page=1`);
     }
@@ -87,7 +86,6 @@ const Home = () => {
   const onChangePage = (num: number) => {
     setNowPage(num);
     window.scrollTo(0, 0);
-
   };
 
   return isStatusPage ? (
@@ -108,7 +106,7 @@ const Home = () => {
                 />
               ))}
           </ListCardStyle>
-          {listVehicles && (
+          {listVehicles && listVehicles.length > 0 && (
             <Pagination
               className="pagination"
               onChange={(_, num) => onChangePage(num)}
@@ -124,11 +122,20 @@ const Home = () => {
               )}
             />
           )}
+          {errorMessage ? (
+            <MessageStyle>
+              {errorMessage}
+            </MessageStyle>
+          ) : (
+            listVehicles && listVehicles.length === 0 &&  <MessageStyle>
+            There are no matches with the specified filter combination
+          </MessageStyle>
+          )}
         </ContainerListStyle>
       </HomeStyle>
     </ContainerPageStyle>
   ) : (
-    <Error errorMessage="404 - No data"/>
+    <Error errorMessage="404 - No data" />
   );
 };
 
